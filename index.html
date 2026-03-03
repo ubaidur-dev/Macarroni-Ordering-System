@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maccaroni | Gourmet Italiano</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container nav-wrapper">
+            <div class="logo">MAC'ARRONI<span>.</span></div>
+            <nav class="nav-links">
+                <a href="#inicio">Inicio</a>
+                <a href="#menu">Menú</a>
+                <a href="#contacto">Contacto</a>
+            </nav>
+            <div class="nav-actions">
+                <div id="auth-ui" class="auth-flex">
+                    <button class="icon-btn-auth" onclick="openAuth('login')" title="Ingresar">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                        <span>Acceso</span>
+                    </button>
+                </div>
+                <div class="cart-wrapper" onclick="toggleCart()" id="main-cart-btn">
+                    <div class="cart-icon-box">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                        <span id="cart-count">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="inicio" class="hero">
+        <div class="container hero-grid">
+            <div class="hero-text">
+                <span class="badge">AUTÉNTICO SABOR DE CARACAS</span>
+                <h1 class="main-title">Pasión por la <br> <span>Pasta</span> <br> Artesanal</h1>
+                <p class="hero-desc">Descubre el secreto de la cocina italiana en el corazón de Venezuela. Calidad gourmet en cada bocado.</p>
+                <div class="hero-btns">
+                    <button class="btn-gold" onclick="document.getElementById('menu').scrollIntoView({behavior: 'smooth'})">Explorar Menú</button>
+                    <button class="btn-outline" onclick="openAuth('reg')">Unirse Ahora</button>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="img-frame">
+                    <img src="https://images.unsplash.com/photo-1546549032-9571cd6b27df?q=80&w=1000&auto=format&fit=crop" alt="Pasta Gourmet">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="menu" class="section-padding">
+        <div class="container">
+            <div class="center-head">
+                <h2 class="playfair" style="font-size: 42px;">Nuestra Carta</h2>
+                <div class="gold-line"></div>
+            </div>
+            <div class="filter-tabs">
+                <button class="tab active" onclick="filterMenu('all', event)">Todo</button>
+                <button class="tab" onclick="filterMenu('pasta', event)">Pastas</button>
+                <button class="tab" onclick="filterMenu('pizza', event)">Pizzas</button>
+            </div>
+            <div id="menu-grid" class="menu-grid"></div>
+        </div>
+    </section>
+
+    <section id="contacto" class="section-padding">
+        <div class="container contact-grid">
+            <div class="contact-info-box">
+                <h2 class="playfair section-title">Reservas</h2>
+                <div class="gold-line-left"></div>
+                <p class="contact-sub">Visítanos en Caracas o haz tu pedido online para una experiencia inolvidable.</p>
+                <div class="info-item">
+                    <div class="info-icon">📍</div>
+                    <div class="info-text">
+                        <h3>Ubicación</h3>
+                        <p>Caracas 1011, Distrito Capital, Venezuela</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">📞</div>
+                    <div class="info-text">
+                        <h3>Teléfono</h3>
+                        <p>+58 424-1676922</p>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-card">
+                <form onsubmit="event.preventDefault(); alert('¡Gracias! Te contactaremos pronto.');">
+                    <input type="text" placeholder="Nombre completo" required>
+                    <input type="email" placeholder="Correo electrónico" required>
+                    <textarea placeholder="Tu mensaje o reserva..." rows="4"></textarea>
+                    <button type="submit" class="btn-gold w-100">Enviar Consulta</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <div id="cart-sidebar" class="sidebar">
+        <div class="sidebar-header" style="display: flex; justify-content: space-between; align-items: center;">
+            <h3>Tu Pedido</h3>
+            <span class="close-x" onclick="toggleCart()" style="cursor:pointer; font-size: 30px; color: var(--gold);">&times;</span>
+        </div>
+        <div id="cart-list" class="sidebar-body"></div>
+        <div class="sidebar-footer">
+            <div class="total-row"><span>Total:</span><span id="cart-total">$0.00</span></div>
+            <button class="btn-wa" onclick="handleCheckout()">WhatsApp Checkout</button>
+        </div>
+    </div>
+
+    <div id="auth-modal" class="modal">
+        <div class="modal-card">
+            <span class="close-x" onclick="closeAuth()" style="position: absolute; top: 20px; right: 25px; cursor:pointer; font-size: 30px; color: var(--gold);">&times;</span>
+            
+            <div id="login-box" class="auth-form-ui">
+                <h2 class="playfair">Bienvenido</h2>
+                <input type="email" id="l-email" placeholder="Email">
+                <input type="password" id="l-pass" placeholder="Contraseña">
+                <button class="btn-gold w-100" onclick="doLogin()">Ingresar</button>
+                <button class="btn-outline w-100" onclick="openAuth('reg')" style="margin: 15px 0 5px 0; border-color: var(--gold); color: var(--gold); margin-left: 0;">Crear cuenta nueva</button>
+                <p class="switch-txt" style="text-align: center; margin-top: 10px;">¿Olvidaste tu contraseña?</p>
+            </div>
+
+            <div id="reg-box" class="auth-form-ui" style="display:none;">
+                <h2 class="playfair">Registro</h2>
+                <input type="text" id="r-name" placeholder="Nombre">
+                <input type="email" id="r-email" placeholder="Email">
+                <input type="password" id="r-pass" placeholder="Password (Min 6)">
+                <button class="btn-gold w-100" onclick="doRegister()">Registrarse</button>
+                <p class="switch-txt" style="text-align: center; margin-top: 15px;">¿Ya tienes cuenta? <span onclick="openAuth('login')" style="color: var(--gold); cursor: pointer;">Inicia sesión</span></p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>© 2026 Mac'arroni Venezuela | Todos los derechos reservados.</p>
+            <p class="dev-line"><b>Software developer / Engineer</b>: Ubaid Ur Rehman</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
