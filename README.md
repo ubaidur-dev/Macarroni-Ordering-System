@@ -19,6 +19,6 @@ Instead of a standard food site, I wanted to demonstrate how a technical solutio
 * **Google Fonts:** Integrated 'Playfair Display' and 'Montserrat' to maintain a classic yet modern brand identity.
 
 ### How to Use
-Clone the repository to your local machine.
-Open the **index.html** file in any modern web browser.
-No complex installations or backend servers are required it’s built to be fast and portable.
+* Clone the **repository** to your local machine.
+* Open the **index.html** file in any modern web browser.
+* **No complex installations** or backend servers are required it’s built to be fast and portable.
